@@ -31,6 +31,27 @@ class CartController extends Controller
                 'slug' => $request->slug
             )
         ));
-        return redirect()->route('cart.index')->with('success_msg', 'Item is aggregate!');
+        return redirect()->route('cart.index')->with('success_msg', '¡El artículo se ha agregado!');
+    }
+
+    public function remove(Request $request){
+        \Cart::remove($request->id);
+        return redirect()->route('cart.index')->with('success_msg', '¡El artículo se ha retirado!');
+    }
+
+    public function update(Request $request){
+        \Cart::update($request->id,
+            array(
+                'quantity' => array(
+                    'relative' => false,
+                    'value' => $request->quantity
+                ),
+        ));
+        return redirect()->route('cart.index')->with('success_msg', '¡El carrito está actualizado!');
+    }
+
+    public function clear(){
+        \Cart::clear();
+        return redirect()->route('cart')->with('success_msg', '¡El coche está limpio!');
     }
 }

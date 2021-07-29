@@ -25,8 +25,9 @@
                 <b>Total: </b>${{ \Cart::getTotal() }}
             </div>
             <div class="col-lg-2">
-                <form action="{{ route('cart.clear') }}" method="POST">
+                <form action="{{ route('cart.remove') }}" method="POST">
                     {{ csrf_field() }}
+                    <input type="hidden" value="{{ $item->id }}" id="id" name="id">
                     <button class="btn btn-secondary btn-sm"><i class="fa fa-trash"></i></button>
                 </form>
             </div>
@@ -35,12 +36,12 @@
     <br>
     <div class="row" style="margin: 0px;">
         <a class="btn btn-dark btn-sm btn-block" href="{{ route('cart.index') }}">
-            CART <i class="fa fa-arrow-right"></i>
+            CARRITO <i class="fa fa-arrow-right"></i>
         </a>
         <a class="btn btn-dark btn-sm btn-block" href="">
             CHECKOUT <i class="fa fa-arrow-right"></i>
         </a>
     </div>
 @else
-    <li class="list-group-item">Your Cart is Empty</li>
+    <li class="list-group-item">Su carrito está vacío</li>
 @endif
