@@ -38,7 +38,7 @@
                                         <input type="hidden" value="1" id="quantity" name="quantity">
                                         <div class="card-footer" style="background-color: white;">
                                               <div class="row">
-                                                <button class="btn btn-secondary btn-sm" class="tooltip-test" title="add to cart">
+                                                <button class="btn btn-secondary btn-sm" class="tooltip-test">
                                                     <i class="fa fa-shopping-cart"></i> añadir al carrito
                                                 </button>
                                             </div>

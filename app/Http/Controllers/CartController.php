@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Mail\SendMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Cart;
 
 class CartController extends Controller
 {
@@ -31,6 +35,7 @@ class CartController extends Controller
                 'slug' => $request->slug
             )
         ));
+
         return redirect()->route('cart.index')->with('success_msg', '¡El artículo se ha agregado!');
     }
 
@@ -50,8 +55,13 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success_msg', '¡El carrito está actualizado!');
     }
 
-    public function clear(){
-        \Cart::clear();
-        return redirect()->route('cart')->with('success_msg', '¡El coche está limpio!');
+    public function comprado(Request $request) {
+        Cart::clear();
+        $listaProducto = DB::table('products')->get();
+        $email = 'osnace@gmail.com';
+        $gmail = 'Estimado cliente, ya ha realizado su compra!';
+        Mail::to($email)->send(new SendMail($gmail));
+        return redirect()->route('cart.index')->with('success_msg', '¡La compra se ha enviado a su correo!');;
     }
+
 }
